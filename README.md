@@ -1,11 +1,16 @@
- # NBA-Draft
+
+# NBA-Draft
 
 The NBA draft is an annual event dating back to 1950 in which the thirty teams from the National Basketball Association (NBA) can draft players who are eligible and wish to join the league. These are typically college basketball players, but international players are also eligible to be drafted. College players who have finished their four-year college eligibility are automatically eligible for selection, while the underclass men have to declare their eligibility and give up their remaining college eligibility. International players who are at least 23 years old are automatically eligible for selection, while the players younger than 22 have to declare their eligibility. No player may sign in with the NBA until he has been eligible for at least one draft. Considering the eligible players, we want to know what are the main features that a player must have in order to be drafted.
 
 Based on a list of 393 eligible players, from 2012 until 2015, and 20 features for each one. The features are: Height; Weight; G (Games Played); MP(Minutes Played per game); FG(Field Goals made per game); FGA(Field Goals attempted per game); 2P (2-points field goals made per game); 2PA(2-points field goals attempted per game); 3P (3-Points field Goals made per game); 3PA(3-Point field Goals attempted per game); FT (Free throws made per game); FTA(Free throws attempted per game); TRB(Total Rebounds per game); AST(Assists per game); STL(Steals per game); BLK(Blocks per game); TOV(Turnovers per game); PF(Personal fouls per game); PTS(Points per game). 
 Pick (Yes if drafted, otherwise No). Pick is our dipendent variable.
+
+All the analysis is conducted in R language.
+
 In order to determine which features are preponderant for a player to be drafted, we build a Classification
 Tree.
+
 Classification Tree is used for categorical response variable, without any assumptions on distributions of parameters, so we try to predict the class probabilities at the leaves. Classification tree partitions a data set into exhaustive (every element of the data set is part of just one node) and non-overlapping nodes. At each node of the tree, the response of interest is summarized by a frequency distribution.
 The objective of a split is to increase the homogeneity of the resulting smaller data sets with respect to the target variable. We continually divide the data set by creating node splits of smaller and smaller data sets. We used the Pruning back tree in order to defence against overfitting. We hope that the simpler tree does better when it used to predict new observations, with the test data set. At each step, we remove the split that contributes least to reduce the number of misclassification. In a classification tree, we predict that each observation belongs to the most commonly occurring class of training observations in the region to which it belongs.
 Our aim is to assign an observation to a given region to the most commonly occurring class of training observation in that region.
