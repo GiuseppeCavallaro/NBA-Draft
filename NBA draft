@@ -1,0 +1,49 @@
+library(tree)
+library(ISLR)
+attach(draft3)
+tree.draft<- tree(Pick~., draft3)
+summary(tree.draft)
+
+plot(tree.draft)
+text(tree.draft,pretty = 0)
+set.seed(2)
+train<- sample(1:nrow(draft3),300)
+draft.test<- draft3[-train,]
+Pick.test<- Pick[-train]
+tree.draft<- tree(Pick~.,draft3,subset = train)
+tree.pred=predict(tree.draft,draft.test, type = "class")
+table(tree.pred,Pick.test)
+
+set.seed(3)
+cv.draft=cv.tree(tree.draft, FUN = prune.misclass )
+names(cv.draft)
+cv.draft
+
+par(mfrow=c(1,2))
+plot(cv.draft$size,cv.draft$dev,type = "b")
+plot(cv.draft$k,cv.draft$dev,type = "b")
+
+prune.draft1<- prune.tree(tree.draft,best = 8)
+plot(prune.draft1)
+text(prune.draft1,pretty=0)
+
+tree.pred1<- predict(prune.draft1,draft.test,type = "class")
+m<-table(tree.pred1,Pick.test)
+sum(diag(prop.table(m)))
+
+library(rpart)
+library("rpart.plot")
+library(rattle)
+library(RColorBrewer)
+set.seed(3)
+control1<-rpart.control(cp=0,xval = 10)
+dtraftrpa<-rpart(Pick~.,data = draft3,control = control1)
+summary(dtraftrpa)
+set.seed(3)
+control2<-rpart.control(cp=0.020710059,xval = 10)
+dtraftrpa2<-rpart(Pick~.,data = draft3,control = control2)
+par(mfrow=c(1,2))
+prp(dtraftrpa2)
+fancyRpartPlot(dtraftrpa2)
+plotcp(dtraftrpa)
+par(mfrow=c(1,1))
